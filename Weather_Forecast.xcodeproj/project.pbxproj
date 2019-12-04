@@ -30,6 +30,7 @@
 		E1D160E1237EA1B8001C273B /* FoundСitiesStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D160E0237EA1B8001C273B /* FoundСitiesStruct.swift */; };
 		E1D160E5237EBD55001C273B /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D160E3237EBD55001C273B /* SearchTableViewCell.swift */; };
 		E1D160E6237EBD55001C273B /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D160E4237EBD55001C273B /* SearchTableViewCell.xib */; };
+		E1FD8F172397BA4A00163E8F /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FD8F162397BA4A00163E8F /* City.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		E1D160E0237EA1B8001C273B /* FoundСitiesStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoundСitiesStruct.swift"; sourceTree = "<group>"; };
 		E1D160E3237EBD55001C273B /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		E1D160E4237EBD55001C273B /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		E1FD8F162397BA4A00163E8F /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		E133C0752375B27C00C1D63A /* models */ = {
 			isa = PBXGroup;
 			children = (
+				E1FD8F162397BA4A00163E8F /* City.swift */,
 				E14F98F72391AACA003F09AE /* UserDefaultsModel.swift */,
 				E1D160E0237EA1B8001C273B /* FoundСitiesStruct.swift */,
 				E1D160DE237E9FDD001C273B /* APIElements.swift */,
@@ -258,6 +261,7 @@
 			files = (
 				E1CC3D25237874DA00041D5C /* WeatherTableViewCell.swift in Sources */,
 				E1C425F8237C528E0005B628 /* CustomCollectionViewCell.swift in Sources */,
+				E1FD8F172397BA4A00163E8F /* City.swift in Sources */,
 				E133C05E237586D800C1D63A /* AppDelegate.swift in Sources */,
 				E1D160DF237E9FDD001C273B /* APIElements.swift in Sources */,
 				E1CC3D1D237847BD00041D5C /* TwelveHoursForecast.swift in Sources */,

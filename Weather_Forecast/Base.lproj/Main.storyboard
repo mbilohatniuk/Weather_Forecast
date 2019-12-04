@@ -214,6 +214,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="QTT-W8-icp">
+                            <rect key="frame" x="0.0" y="99.5" width="414" height="171"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No favourite cities" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUH-lU-Zjd">
+                                    <rect key="frame" x="0.0" y="50" width="414" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstItem="FUH-lU-Zjd" firstAttribute="height" secondItem="QTT-W8-icp" secondAttribute="height" multiplier="0.2" id="7jp-OI-xdb"/>
+                                <constraint firstItem="FUH-lU-Zjd" firstAttribute="top" secondItem="QTT-W8-icp" secondAttribute="top" constant="50" id="Bkw-cs-JJO"/>
+                                <constraint firstItem="FUH-lU-Zjd" firstAttribute="width" secondItem="QTT-W8-icp" secondAttribute="width" id="Y43-YG-5Sh"/>
+                                <constraint firstItem="FUH-lU-Zjd" firstAttribute="centerX" secondItem="QTT-W8-icp" secondAttribute="centerX" id="p4a-D5-SOB"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favouriteCell" id="FsS-wQ-ovj">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
@@ -232,6 +251,7 @@
                     <navigationItem key="navigationItem" title="Favourite Citys" id="Bw5-54-Oxt"/>
                     <connections>
                         <outlet property="favouriveTableView" destination="NcQ-jc-dAW" id="rsD-ZX-oah"/>
+                        <outlet property="noFavouriteCitiesMassage" destination="QTT-W8-icp" id="Qlx-JI-jQj"/>
                         <segue destination="e0o-CV-ASA" kind="show" identifier="addCity" id="ofS-K3-fd7"/>
                     </connections>
                 </tableViewController>

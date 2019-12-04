@@ -13,7 +13,6 @@ enum FetchError: Error, LocalizedError {
     case dataIsNill(String)
     case invalidURL(String)
     
-    //enum assosiated value
     var errorDescription: String? {
         switch self {
         case .decodeError(let description):
@@ -51,7 +50,7 @@ class FiveDayForecast: APIConfigurator {
     
     func fetchDailyForecasts(cityKey: String, completion: @escaping(DailyForecastsResponse) -> Void, failure: @escaping(Error) -> Void) {
         
-        guard let url = URL(string: "\(self.host)/v1/daily/5day/\(cityKey)?apikey=\(self.APIKey)\(self.detailsForAPI)\(self.metricForAPI)") else {
+        guard let url = URL(string: "\(self.host)/forecasts/v1/daily/5day/\(cityKey)?apikey=\(self.APIKey)\(self.detailsForAPI)\(self.metricForAPI)") else {
             return
         }
         

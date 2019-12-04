@@ -12,35 +12,30 @@ import UIKit
 //dqaI6T11mu6GjnsGcF2FEbZG9bLnJjU4
 //2Y3QkGbwhy2MMit0vIbCJMzCp0lITYx3
 
-struct Constant {
+ struct Constants {
     
     static let heightCell: CGFloat = 300
-    static let host = "http://dataservice.accuweather.com/forecasts"
-    static let APIKey = "2Y3QkGbwhy2MMit0vIbCJMzCp0lITYx3"
+    static let host = "http://dataservice.accuweather.com"
+    static let APIKey = "dqaI6T11mu6GjnsGcF2FEbZG9bLnJjU4"
     static let backgroundImage = UIImage(named: "background_forecast")
-}
-
-struct City: Codable{
-    let key: String
-    let cityName: String
-    let country: String
 }
 
 class ForecastViewController: UIViewController {
     
+    //MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: - private variables
     
-    private var fiveDayForecastAPIConfig = APIElements(host: Constant.host,
-                                               APIKey: Constant.APIKey,
+    private var fiveDayForecastAPIConfig = APIElements(host: Constants.host,
+                                               APIKey: Constants.APIKey,
                                                details: true,
                                                metric: true)
     
-    private let twelveHoursForecastAPIConfig = APIElements(host: Constant.host,
-                                                   APIKey: Constant.APIKey,
+    private let twelveHoursForecastAPIConfig = APIElements(host: Constants.host,
+                                                   APIKey: Constants.APIKey,
                                                    metric: true)
     
     
@@ -79,7 +74,7 @@ class ForecastViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItem = favouriteButton
         
-        backgroundImage.image = Constant.backgroundImage
+        backgroundImage.image = Constants.backgroundImage
         
         // Register table  and collection cell class from nib
         let cellNib = UINib(nibName: "WeatherTableViewCell", bundle: nil)
@@ -113,12 +108,12 @@ class ForecastViewController: UIViewController {
 }
 
 
-// FILL TABLE VIEW
+//MARK: -  Implement table view protocol
 extension ForecastViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return Constant.heightCell
+        return Constants.heightCell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -141,7 +136,7 @@ extension ForecastViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 
-//FILL COLLECTION VEIEW
+//MARK: - Implement collection view protocol
 extension ForecastViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -165,7 +160,7 @@ extension ForecastViewController: UICollectionViewDataSource, UICollectionViewDe
 
 
 
-//RELOAD MAIN SCREEN BY NEW CITY KEY
+//MARK: - RELOAD MAIN SCREEN BY NEW CITY KEY
 extension ForecastViewController {
     
     public func reloadScreen(whith cityKey: String = "326175") {

@@ -42,7 +42,7 @@ class TwelveHoursForecast: APIConfigurator {
     
     
     func fetchTwelveHoursForecasts(cityKey: String, completion: @escaping([TwelveHoursForecastResponse]) -> Void, failure: @escaping(Error) -> Void) {
-        guard let url = URL(string: "\(self.host)/v1/hourly/12hour/\(cityKey)?apikey=\(self.APIKey)\(self.metricForAPI)") else {
+        guard let url = URL(string: "\(self.host)/forecasts/v1/hourly/12hour/\(cityKey)?apikey=\(self.APIKey)\(self.metricForAPI)") else {
             return
         }
         

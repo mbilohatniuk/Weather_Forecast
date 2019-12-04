@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class FindCityViewController: UIViewController {
     
     //MARK: - private variabels
@@ -16,11 +15,11 @@ class FindCityViewController: UIViewController {
     private var responseCities: [FoundCities]?
     private var resultOfUserRequest = [FoundCities]()
     private let searchController = UISearchController(searchResultsController: nil)
-    private let service = FindCity(host: "http://dataservice.accuweather.com/locations", APIKey: Constant.APIKey)
+    private let service = FindCity(host: Constants.host, APIKey: Constants.APIKey)
     
     @IBOutlet weak var tableView: UITableView!
     
-
+    
     
     //MARK: - ViewContriller lifecicle
     
@@ -34,6 +33,31 @@ class FindCityViewController: UIViewController {
     }
     
     //MARK: - Private functions
+    
+    private func addCity(indexPath: Int) {
+        let userDefaultsModel = UserDefaultsModel()
+        let city = City(key: resultOfUserRequest[indexPath].key,
+                        cityName: resultOfUserRequest[indexPath].cityName,
+                        country: resultOfUserRequest[indexPath].country.countryName)
+        
+        
+        let array = userDefaultsModel.addFavouriteCities(key: userDefaultsKey,
+                                                         city: city)
+        
+        userDefaultsModel.resaveFavouriteCities(key: userDefaultsKey,
+                                                array: array)
+    }
+    
+    private func popToRootVC(indexPath: Int) {
+        guard let forecastVC = self.navigationController?.viewControllers
+            .map({ $0 as? ForecastViewController })
+            .compactMap({ $0 })
+            .first
+            else { return }
+        
+        forecastVC.reloadScreen(whith: resultOfUserRequest[indexPath].key)
+        navigationController?.popToViewController(forecastVC, animated: true)
+    }
     
     private func searchControllerSetup(_ searchController: UISearchController) {
         searchController.searchResultsUpdater = self
@@ -74,30 +98,25 @@ extension FindCityViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let userDefaultsModel = UserDefaultsModel()
-        let city = City(key: resultOfUserRequest[indexPath.row].key,
-                        cityName: resultOfUserRequest[indexPath.row].cityName,
-                        country: resultOfUserRequest[indexPath.row].country.countryName)
-
         
-        let array = userDefaultsModel.addFavouriteCities(key: userDefaultsKey,
-                                                         city: city)
+        let city = "\(resultOfUserRequest[indexPath.row].cityName), \(resultOfUserRequest[indexPath.row].country.countryName)"
+        let alertController = UIAlertController(title: "Add City", message: "Do you whant add \"\(city)\" to your list?", preferredStyle: .alert)
+        let okBtn = UIAlertAction(title: "Add", style: .default) { (alert) in
+            self.addCity(indexPath: indexPath.row)
+            self.popToRootVC(indexPath: indexPath.row)
+        }
+        let cancelBtn = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        userDefaultsModel.resaveFavouriteCities(key: userDefaultsKey,
-                                                array: array)
-        guard let forecastVC = self.navigationController?.viewControllers
-            .map({ $0 as? ForecastViewController })
-            .compactMap({ $0 })
-            .first
-            else { return }
-
-        forecastVC.reloadScreen(whith: resultOfUserRequest[indexPath.row].key)
-        navigationController?.popToViewController(forecastVC, animated: true)
+        alertController.addAction(okBtn)
+        alertController.addAction(cancelBtn)
+        
+        present(alertController, animated: true, completion: nil)
+        
     }
     
 }
 
-//MAKR: - Search method implementation
+//MARK: - Search method implementation
 extension FindCityViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {

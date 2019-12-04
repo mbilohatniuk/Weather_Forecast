@@ -6,6 +6,8 @@
 //  Copyright © 2019 Maksym Bilohatniuk. All rights reserved.
 //
 
+
+
 import UIKit
 
 class FavouriteCitysTableViewController: UITableViewController {
@@ -17,7 +19,8 @@ class FavouriteCitysTableViewController: UITableViewController {
     
     @IBOutlet var favouriveTableView: UITableView!
     
-    //MARK ViewController lifecicle
+    @IBOutlet weak var noFavouriteCitiesMassage: UIView!
+    //MARK: - ViewController lifecicle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +33,12 @@ class FavouriteCitysTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
             reloadData()
+        
+        if arrayOfFavouriteCities.count > 0 {
+            noFavouriteCitiesMassage.isHidden = true
+        } else {
+            noFavouriteCitiesMassage.isHidden = false
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -43,6 +52,15 @@ class FavouriteCitysTableViewController: UITableViewController {
     
     
     //MARK: - Private functions
+    
+    private func removeCity(indexPath: IndexPath) {
+        arrayOfFavouriteCities = userDefaultsModel.removeFavouriteCity(key: userDefaultsKey, by: indexPath.row)
+        userDefaultsModel.resaveFavouriteCities(key: userDefaultsKey, array: arrayOfFavouriteCities)
+        reloadData()
+        tableView.beginUpdates()
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.endUpdates()
+    }
     
     private func reloadData() {
         let defaults = UserDefaults.standard
@@ -59,7 +77,7 @@ class FavouriteCitysTableViewController: UITableViewController {
     }
 }
 
-
+//MARK: - Table View Extention
 extension FavouriteCitysTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -100,12 +118,17 @@ extension FavouriteCitysTableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            arrayOfFavouriteCities = userDefaultsModel.removeFavouriteCity(key: userDefaultsKey, by: indexPath.row)
-            userDefaultsModel.resaveFavouriteCities(key: userDefaultsKey, array: arrayOfFavouriteCities)
-            reloadData()
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
+            let alertController = UIAlertController(title: "Are you sure", message: "Delete city?", preferredStyle: .alert)
+            let okBtn = UIAlertAction(title: "Remove", style: .default) { (alert) in
+                self.removeCity(indexPath: indexPath)
+            }
+            let cancelBtn = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alertController.addAction(okBtn)
+            alertController.addAction(cancelBtn)
+            
+           present(alertController, animated: true, completion: nil)
+            
         }
     }
 }

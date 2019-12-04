@@ -23,7 +23,7 @@ fileprivate class Constatnts {
 }
 
 class WeatherTableViewCell: UITableViewCell {
-    
+     //MARK: - Outlets
     @IBOutlet weak var headlerImage: UIImageView!
     @IBOutlet weak var sunRiseImage: UIImageView!
     @IBOutlet weak var sunSetImage: UIImageView!
@@ -103,46 +103,47 @@ class WeatherTableViewCell: UITableViewCell {
         probabilityForecast(model: model)
     }
     
+    //MARK: private functions
     private func probabilityForecast (model: DailyForecast) {
         
-        if model.day.rainProbability != 0 {
+        if model.day.rainProbability > 15 {
             dayRainProbabilityStack.isHidden = false
             dayRainProbabilityImage.image = Constatnts.rainImage
             dayRainProbabilityLabel.text = "\(model.day.rainProbability)%"
         }
         
-        if model.day.thunderstormProbability != 0 {
+        if model.day.thunderstormProbability > 15 {
             dayThunderstormProbabilityStack.isHidden = false
             dayThunderstormProbabilityImage.image = Constatnts.thunderImage
             dayThunderstormProbabilityLabel.text = "\(model.day.thunderstormProbability)%"
         }
         
-        if model.day.snowProbability != 0 {
+        if model.day.snowProbability > 15 {
             daySnowProbabilityStack.isHidden = false
             daySnowProbabilityImage.image = Constatnts.snowImage
             daySnowProbabilityLabel.text = "\(model.day.rainProbability)%"
         }
         
-        if model.night.rainProbability != 0 {
+        if model.night.rainProbability > 15 {
             nightRainProbabilityStack.isHidden = false
             nightRainProbabilityImage.image = Constatnts.rainImage
             nightRainProbabilityLabel.text = "\(model.night.rainProbability)%"
         }
         
-        if model.night.thunderstormProbability != 0 {
+        if model.night.thunderstormProbability > 15 {
             nightThunderstormProbabilityStack.isHidden = false
             nightThunderstormProbabilityImage.image = Constatnts.thunderImage
             nightThunderstormProbabilityLabel.text = "\(model.night.rainProbability)%"
         }
         
-        if model.night.snowProbability != 0 {
+        if model.night.snowProbability > 15 {
             daySnowProbabilityStack.isHidden = false
             daySnowProbabilityImage.image = Constatnts.snowImage
             daySnowProbabilityLabel.text = "\(model.night.rainProbability) %"
         }
     }
 }
-
+//MARK: - Date Extention
 extension Date {
     func toStringDate( dateFormat format  : String ) -> String {
         let dateFormatter = DateFormatter()
