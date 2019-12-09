@@ -145,16 +145,18 @@ class WeatherTableViewCell: UITableViewCell {
 }
 //MARK: - Date Extention
 extension Date {
-    func toStringDate( dateFormat format  : String ) -> String {
+    func toStringDate(dateFormat format: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         dateFormatter.dateFormat = "EEEE"
+        //dateFormatter.timeZone = TimeZone(identifier: timeZone)
         return dateFormatter.string(from: self)
     }
     
-    func toStringTime( dateFormat format  : String ) -> String {
+    func toStringTime( dateFormat format  : String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
+        //dateFormatter.timeZone = TimeZone(identifier: timeZone)
         return dateFormatter.string(from: self)
     }
 }

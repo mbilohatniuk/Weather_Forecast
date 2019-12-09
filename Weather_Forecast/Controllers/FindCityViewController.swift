@@ -50,11 +50,11 @@ class FindCityViewController: UIViewController {
     
     private func popToRootVC(indexPath: Int) {
         guard let forecastVC = self.navigationController?.viewControllers
-            .map({ $0 as? ForecastViewController })
-            .compactMap({ $0 })
+            .compactMap({ $0 as? ForecastViewController })
             .first
             else { return }
         
+        forecastVC.cityNameLabel.text = "\(resultOfUserRequest[indexPath].cityName)"
         forecastVC.reloadScreen(whith: resultOfUserRequest[indexPath].key)
         navigationController?.popToViewController(forecastVC, animated: true)
     }
@@ -99,19 +99,13 @@ extension FindCityViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let city = "\(resultOfUserRequest[indexPath.row].cityName), \(resultOfUserRequest[indexPath.row].country.countryName)"
-        let alertController = UIAlertController(title: "Add City", message: "Do you whant add \"\(city)\" to your list?", preferredStyle: .alert)
-        let okBtn = UIAlertAction(title: "Add", style: .default) { (alert) in
-            self.addCity(indexPath: indexPath.row)
-            self.popToRootVC(indexPath: indexPath.row)
-        }
-        let cancelBtn = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let city = "\(resultOfUserRequest[indexPath.row].cityName),                 \(resultOfUserRequest[indexPath.row].country.countryName)"
         
-        alertController.addAction(okBtn)
-        alertController.addAction(cancelBtn)
-        
-        present(alertController, animated: true, completion: nil)
-        
+        Alert.presentAddAlert(on: self,
+                              city: city,
+                              toDoCompletion1: addCity(indexPath:),
+                              toDoCompletion2: popToRootVC(indexPath:),
+                              indexPath: indexPath.row)
     }
     
 }
@@ -124,7 +118,7 @@ extension FindCityViewController: UISearchResultsUpdating, UISearchBarDelegate {
         guard let text = searchController.searchBar.text else { return }
         
         if text.count >= 2 {
-            service.fetchFindCity(query: text, completion: updateTableView(whith:), failure: workWhithError(error:))
+            service.fetchAutocompleteCity(query: text, completion: updateTableView(whith:), failure: workWhithError(error:))
         } else {
             resultOfUserRequest.removeAll()
             tableView.reloadData()

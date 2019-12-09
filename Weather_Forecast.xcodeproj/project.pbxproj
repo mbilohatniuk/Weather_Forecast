@@ -31,6 +31,7 @@
 		E1D160E5237EBD55001C273B /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D160E3237EBD55001C273B /* SearchTableViewCell.swift */; };
 		E1D160E6237EBD55001C273B /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1D160E4237EBD55001C273B /* SearchTableViewCell.xib */; };
 		E1FD8F172397BA4A00163E8F /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FD8F162397BA4A00163E8F /* City.swift */; };
+		E1FD9C4123980C61008038CB /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FD9C4023980C61008038CB /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		E1D160E3237EBD55001C273B /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		E1D160E4237EBD55001C273B /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		E1FD8F162397BA4A00163E8F /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		E1FD9C4023980C61008038CB /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		E133C0752375B27C00C1D63A /* models */ = {
 			isa = PBXGroup;
 			children = (
+				E1FD9C4023980C61008038CB /* Alert.swift */,
 				E1FD8F162397BA4A00163E8F /* City.swift */,
 				E14F98F72391AACA003F09AE /* UserDefaultsModel.swift */,
 				E1D160E0237EA1B8001C273B /* FoundСitiesStruct.swift */,
@@ -264,6 +267,7 @@
 				E1FD8F172397BA4A00163E8F /* City.swift in Sources */,
 				E133C05E237586D800C1D63A /* AppDelegate.swift in Sources */,
 				E1D160DF237E9FDD001C273B /* APIElements.swift in Sources */,
+				E1FD9C4123980C61008038CB /* Alert.swift in Sources */,
 				E1CC3D1D237847BD00041D5C /* TwelveHoursForecast.swift in Sources */,
 				E1CC3D202378512A00041D5C /* TwelveHoursForecastStruct.swift in Sources */,
 				E133C060237586D800C1D63A /* SceneDelegate.swift in Sources */,

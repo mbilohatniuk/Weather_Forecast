@@ -103,11 +103,11 @@ extension FavouriteCitysTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let forecastVC = navigationController?.viewControllers
-            .map({ $0 as? ForecastViewController})
-            .compactMap({ $0 })
+            .compactMap({ $0 as? ForecastViewController})
             .first
             else { return }
         
+        forecastVC.cityNameLabel.text = "\(arrayOfFavouriteCities[indexPath.row].cityName)"
         forecastVC.reloadScreen(whith: arrayOfFavouriteCities[indexPath.row].key)
         navigationController?.popToViewController(forecastVC, animated: true)
     }
@@ -118,20 +118,7 @@ extension FavouriteCitysTableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let alertController = UIAlertController(title: "Are you sure", message: "Delete city?", preferredStyle: .alert)
-            let okBtn = UIAlertAction(title: "Remove", style: .default) { (alert) in
-                self.removeCity(indexPath: indexPath)
-            }
-            let cancelBtn = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            
-            alertController.addAction(okBtn)
-            alertController.addAction(cancelBtn)
-            
-           present(alertController, animated: true, completion: nil)
-            
+            Alert.presentRemoveAction(on: self, completionAction: removeCity(indexPath:), indexPath: indexPath)
         }
     }
 }
-
-
-

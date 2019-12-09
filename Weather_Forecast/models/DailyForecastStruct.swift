@@ -21,6 +21,8 @@ struct DailyForecast: Decodable {
     let sun: Sun
     let temperature: Temperature
     let day, night: Day
+    
+  //  var timeZoneName: String = ""
 
 
     enum CodingKeys: String, CodingKey {

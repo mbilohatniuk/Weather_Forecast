@@ -26,8 +26,11 @@ class ForecastViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var cityNameLabel: UILabel!
     
     //MARK: - private variables
+    
+   // private var timeZoneNAme: String = "" //TODO
     
     private var fiveDayForecastAPIConfig = APIElements(host: Constants.host,
                                                APIKey: Constants.APIKey,
@@ -94,11 +97,11 @@ class ForecastViewController: UIViewController {
     
     //MARK: - private functions
     
-    private func setHourlyForecastData(_ data: [TwelveHoursForecastResponse]) -> Void {
+    private func setHourlyForecastData(_ data: [TwelveHoursForecastResponse]) {
         responseDataForTwelveHours = data
     }
     
-    private func setFiveDaysForecastData(_ data: DailyForecastsResponse) -> Void {
+    private func setFiveDaysForecastData(_ data: DailyForecastsResponse) {
         responseDataForFiveDays = data
     }
     
@@ -110,7 +113,7 @@ class ForecastViewController: UIViewController {
 
 //MARK: -  Implement table view protocol
 extension ForecastViewController: UITableViewDelegate, UITableViewDataSource {
-    
+    //private??
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return Constants.heightCell
@@ -133,7 +136,6 @@ extension ForecastViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
-
 
 
 //MARK: - Implement collection view protocol
@@ -164,6 +166,21 @@ extension ForecastViewController: UICollectionViewDataSource, UICollectionViewDe
 extension ForecastViewController {
     
     public func reloadScreen(whith cityKey: String = "326175") {
+        // FETCH
+//
+//        let group = DispatchGroup()
+//
+//
+//        //fetch .. {
+//        group.enter()
+//        //  dataTask {
+//                 group.leave()
+//        //   }
+//        //}
+//
+//        group.notify(queue: .main) {
+//            print("All fetches DONE!")
+//        }
         
         let fiveDayForecast = FiveDayForecast(host: fiveDayForecastAPIConfig.host,
                                               APIKey: fiveDayForecastAPIConfig.APIKey,
@@ -181,5 +198,6 @@ extension ForecastViewController {
         twelveHoursForecast.fetchTwelveHoursForecasts(cityKey: cityKey,
                                                       completion: setHourlyForecastData(_:),
                                                       failure: workWithError(_:))
+        
     }
 }

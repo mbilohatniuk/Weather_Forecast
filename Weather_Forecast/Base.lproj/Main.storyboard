@@ -197,6 +197,7 @@
                     <navigationItem key="navigationItem" title="Weather Forecast" id="ZiS-QU-ksW"/>
                     <connections>
                         <outlet property="backgroundImage" destination="LP2-cd-EzP" id="Jkq-gr-zFh"/>
+                        <outlet property="cityNameLabel" destination="lkV-6p-sA0" id="h3I-gY-erz"/>
                         <outlet property="collectionView" destination="Lz2-bP-pT0" id="7AK-1Y-Tpu"/>
                         <outlet property="tableView" destination="3bO-E7-OIc" id="4Fi-k7-YtL"/>
                         <segue destination="ZcY-lu-v0V" kind="show" identifier="toFavouriteCities" id="idQ-O8-ICh"/>

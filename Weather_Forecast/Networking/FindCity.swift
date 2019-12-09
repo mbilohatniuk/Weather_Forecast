@@ -21,7 +21,9 @@ class FindCity: APIConfigurator {
         self.APIKey = APIKey
     }
     
-    func fetchFindCity(query: String, completion: @escaping([FoundCities]) -> Void, failure: @escaping(Error) -> Void) {
+//    func fetchCityInfo(
+    
+    func fetchAutocompleteCity(query: String, completion: @escaping([FoundCities]) -> Void, failure: @escaping(Error) -> Void) {
         
         guard let url = URL(string: "\(self.host)/locations/v1/cities/autocomplete?apikey=\(self.APIKey)&q=\(query)") else {
             return                  

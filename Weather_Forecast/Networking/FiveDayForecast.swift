@@ -75,6 +75,7 @@ class FiveDayForecast: APIConfigurator {
                 
                 DispatchQueue.main.async {
                     completion(fiveDayData)
+                    //leave
                 }
                 
             } catch let error {
