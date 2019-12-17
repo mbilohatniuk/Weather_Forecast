@@ -29,8 +29,7 @@ class ForecastViewController: UIViewController {
     @IBOutlet weak var cityNameLabel: UILabel!
     
     //MARK: - private variables
-    
-   // private var timeZoneNAme: String = "" //TODO
+
     
     private var fiveDayForecastAPIConfig = APIElements(host: Constants.host,
                                                APIKey: Constants.APIKey,
@@ -166,21 +165,6 @@ extension ForecastViewController: UICollectionViewDataSource, UICollectionViewDe
 extension ForecastViewController {
     
     public func reloadScreen(whith cityKey: String = "326175") {
-        // FETCH
-//
-//        let group = DispatchGroup()
-//
-//
-//        //fetch .. {
-//        group.enter()
-//        //  dataTask {
-//                 group.leave()
-//        //   }
-//        //}
-//
-//        group.notify(queue: .main) {
-//            print("All fetches DONE!")
-//        }
         
         let fiveDayForecast = FiveDayForecast(host: fiveDayForecastAPIConfig.host,
                                               APIKey: fiveDayForecastAPIConfig.APIKey,
