@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E10940F623AA70550022911F /* TimeZoneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10940F523AA70550022911F /* TimeZoneService.swift */; };
+		E10940F823AA74F90022911F /* TimeZoneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10940F723AA74F90022911F /* TimeZoneModel.swift */; };
 		E133C05E237586D800C1D63A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E133C05D237586D800C1D63A /* AppDelegate.swift */; };
 		E133C060237586D800C1D63A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E133C05F237586D800C1D63A /* SceneDelegate.swift */; };
 		E133C065237586D800C1D63A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E133C063237586D800C1D63A /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		E10940F523AA70550022911F /* TimeZoneService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneService.swift; sourceTree = "<group>"; };
+		E10940F723AA74F90022911F /* TimeZoneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneModel.swift; sourceTree = "<group>"; };
 		E133C05A237586D800C1D63A /* Weather_Forecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather_Forecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E133C05D237586D800C1D63A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E133C05F237586D800C1D63A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		E133C0752375B27C00C1D63A /* models */ = {
 			isa = PBXGroup;
 			children = (
+				E10940F723AA74F90022911F /* TimeZoneModel.swift */,
 				E1FD9C4023980C61008038CB /* Alert.swift */,
 				E1FD8F162397BA4A00163E8F /* City.swift */,
 				E14F98F72391AACA003F09AE /* UserDefaultsModel.swift */,
@@ -276,6 +279,7 @@
 				E10940F623AA70550022911F /* TimeZoneService.swift in Sources */,
 				E1CC3D25237874DA00041D5C /* WeatherTableViewCell.swift in Sources */,
 				E1C425F8237C528E0005B628 /* CustomCollectionViewCell.swift in Sources */,
+				E10940F823AA74F90022911F /* TimeZoneModel.swift in Sources */,
 				E1FD8F172397BA4A00163E8F /* City.swift in Sources */,
 				E133C05E237586D800C1D63A /* AppDelegate.swift in Sources */,
 				E1D160DF237E9FDD001C273B /* APIElements.swift in Sources */,

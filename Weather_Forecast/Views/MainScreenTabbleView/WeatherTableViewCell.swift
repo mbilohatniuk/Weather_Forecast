@@ -89,8 +89,8 @@ class WeatherTableViewCell: UITableViewCell {
         sunSetImage.image = Constatnts.sunSetImage
         dayImage.image = Constatnts.dayImage
         nightImage.image = Constatnts.nightImage
-        sunRiseTime.text = model.sun.rise.toStringTime(dateFormat: Constatnts.dateFormatTime)
-        sunSetTime.text = model.sun.sunSet.toStringTime(dateFormat: Constatnts.dateFormatTime)
+        sunRiseTime.text = model.sun.rise.toStringTime(dateFormat: Constatnts.dateFormatTime, timeZone: model.timeZone ?? "")
+        sunSetTime.text = model.sun.sunSet.toStringTime(dateFormat: Constatnts.dateFormatTime, timeZone: model.timeZone ?? "")
         titleLabel.text = model.date.toStringDate(dateFormat: Constatnts.dateFormatDate)
         minMaxTempLabel.text = "\(model.temperature.minimum.value) - \(model.temperature.maximum.value)ºC"
         iconDayPhrase.text = model.day.iconPhrase
@@ -145,18 +145,20 @@ class WeatherTableViewCell: UITableViewCell {
 }
 //MARK: - Date Extention
 extension Date {
+    
     func toStringDate(dateFormat format: String) -> String {
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         dateFormatter.dateFormat = "EEEE"
-        //dateFormatter.timeZone = TimeZone(identifier: timeZone)
         return dateFormatter.string(from: self)
     }
     
-    func toStringTime( dateFormat format  : String) -> String {
+    func toStringTime( dateFormat format: String, timeZone: String) -> String {
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        //dateFormatter.timeZone = TimeZone(identifier: timeZone)
+        dateFormatter.timeZone = TimeZone(identifier: timeZone)
         return dateFormatter.string(from: self)
     }
 }

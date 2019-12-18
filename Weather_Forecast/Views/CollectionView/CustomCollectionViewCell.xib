@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPc-0u-xMZ">
-                        <rect key="frame" x="0.0" y="54" width="100" height="30"/>
+                        <rect key="frame" x="0.0" y="34" width="100" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -34,7 +34,7 @@
             <constraints>
                 <constraint firstItem="WPc-0u-xMZ" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="0eF-vJ-Ki4"/>
                 <constraint firstItem="gRF-gL-qUr" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="MX5-X4-56U"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="top" secondItem="WPc-0u-xMZ" secondAttribute="top" constant="-10" id="gnE-ac-Ip3"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="top" secondItem="WPc-0u-xMZ" secondAttribute="top" constant="10" id="gnE-ac-Ip3"/>
                 <constraint firstItem="WPc-0u-xMZ" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="hXu-tN-dfv"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="WPc-0u-xMZ" secondAttribute="trailing" id="j76-Lp-MFR"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="gRF-gL-qUr" secondAttribute="trailing" id="vMv-EZ-gq1"/>

@@ -14,10 +14,10 @@ class CustomCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var tempLabel: UILabel!
     
     func configure(model: TwelveHoursForecastResponse) {
-        timeLabel.text = model.dateTime.toStringTime(dateFormat: "hh:mm")
+        timeLabel.text = model.dateTime.toStringTime(dateFormat: "hh:mm", timeZone: model.timeZone ?? "")
         tempLabel.text = "\(model.temperature.value)ºC"
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = 12.0

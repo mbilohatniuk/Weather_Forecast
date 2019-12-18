@@ -108,7 +108,7 @@ extension FavouriteCitysTableViewController {
             else { return }
         
         forecastVC.cityNameLabel.text = "\(arrayOfFavouriteCities[indexPath.row].cityName)"
-        forecastVC.reloadScreen(whith: arrayOfFavouriteCities[indexPath.row].key)
+        forecastVC.reloadScreenData(whith: arrayOfFavouriteCities[indexPath.row].key)
         navigationController?.popToViewController(forecastVC, animated: true)
     }
     

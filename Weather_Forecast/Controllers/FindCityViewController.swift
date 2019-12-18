@@ -55,7 +55,7 @@ class FindCityViewController: UIViewController {
             else { return }
         
         forecastVC.cityNameLabel.text = "\(resultOfUserRequest[indexPath].cityName)"
-        forecastVC.reloadScreen(whith: resultOfUserRequest[indexPath].key)
+        forecastVC.reloadScreenData(whith: resultOfUserRequest[indexPath].key)
         navigationController?.popToViewController(forecastVC, animated: true)
     }
     

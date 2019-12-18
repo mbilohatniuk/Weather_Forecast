@@ -11,8 +11,8 @@ import Foundation
 struct TwelveHoursForecastResponse: Decodable {
     let dateTime: Date
     let temperature: TemperatureOfHour
-    
-   // var timeZoneName: String = ""
+
+    var timeZone: String?
 
     enum CodingKeys: String, CodingKey {
         case dateTime = "DateTime"

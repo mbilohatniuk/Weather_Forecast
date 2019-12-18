@@ -28,15 +28,14 @@ class ForecastViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cityNameLabel: UILabel!
     
-    //MARK: - private variables
-
     
+    //MARK: - private variables
     private var fiveDayForecastAPIConfig = APIElements(host: Constants.host,
                                                APIKey: Constants.APIKey,
                                                details: true,
                                                metric: true)
     
-    private let twelveHoursForecastAPIConfig = APIElements(host: Constants.host,
+    private var twelveHoursForecastAPIConfig = APIElements(host: Constants.host,
                                                    APIKey: Constants.APIKey,
                                                    metric: true)
     
@@ -57,9 +56,9 @@ class ForecastViewController: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let cities = [City]()
         
         let encoder = JSONEncoder()
@@ -85,7 +84,7 @@ class ForecastViewController: UIViewController {
         let CVCellNin = UINib(nibName: "CustomCollectionViewCell", bundle: nil)
         self.collectionView.register(CVCellNin, forCellWithReuseIdentifier: "CVCellID")
         
-        reloadScreen()
+        reloadScreenData()
         tableView.reloadData()
         collectionView.reloadData()
     }
@@ -95,6 +94,18 @@ class ForecastViewController: UIViewController {
     }
     
     //MARK: - private functions
+    private func setTimeZone(_ data: TimeZoneModel) {
+        guard responseDataForFiveDays != nil, responseDataForTwelveHours != nil else { return }
+        
+        for index in 0...responseDataForTwelveHours!.count - 1 {
+            responseDataForTwelveHours![index].timeZone = data.timeZone.name
+        }
+        
+        for index in 0...responseDataForFiveDays!.dailyForecasts.count - 1 {
+            responseDataForFiveDays!.dailyForecasts[index].timeZone = data.timeZone.name
+        }
+
+    }
     
     private func setHourlyForecastData(_ data: [TwelveHoursForecastResponse]) {
         responseDataForTwelveHours = data
@@ -112,7 +123,7 @@ class ForecastViewController: UIViewController {
 
 //MARK: -  Implement table view protocol
 extension ForecastViewController: UITableViewDelegate, UITableViewDataSource {
-    //private??
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return Constants.heightCell
@@ -164,7 +175,7 @@ extension ForecastViewController: UICollectionViewDataSource, UICollectionViewDe
 //MARK: - RELOAD MAIN SCREEN BY NEW CITY KEY
 extension ForecastViewController {
     
-    public func reloadScreen(whith cityKey: String = "326175") {
+    public func reloadScreenData(whith cityKey: String = "326175") {
         
         let fiveDayForecast = FiveDayForecast(host: fiveDayForecastAPIConfig.host,
                                               APIKey: fiveDayForecastAPIConfig.APIKey,
@@ -182,6 +193,13 @@ extension ForecastViewController {
         twelveHoursForecast.fetchTwelveHoursForecasts(cityKey: cityKey,
                                                       completion: setHourlyForecastData(_:),
                                                       failure: workWithError(_:))
+        
+        let timeZoneService = TimeZoneService(host: Constants.host,
+                                              APIKey: Constants.APIKey)
+        
+        timeZoneService.fetchTimeZone(cityKey: cityKey,
+                                      completion: setTimeZone(_:),
+                                      failure: workWithError(_:))
         
     }
 }

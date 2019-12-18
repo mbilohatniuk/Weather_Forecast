@@ -10,8 +10,8 @@ import Foundation
 
 class FindCity: APIConfigurator {
     
-    var host: String
-    var APIKey: String
+    let host: String
+    let APIKey: String
     var details: Bool?
     var metric: Bool?
     var cityKey: String?
@@ -20,8 +20,6 @@ class FindCity: APIConfigurator {
         self.host = host
         self.APIKey = APIKey
     }
-    
-//    func fetchCityInfo(
     
     func fetchAutocompleteCity(query: String, completion: @escaping([FoundCities]) -> Void, failure: @escaping(Error) -> Void) {
         

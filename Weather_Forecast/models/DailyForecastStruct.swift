@@ -9,7 +9,7 @@
 import Foundation
  
 struct DailyForecastsResponse: Decodable {
-    let dailyForecasts: [DailyForecast]
+    var dailyForecasts: [DailyForecast]
 
     enum CodingKeys: String, CodingKey {
         case dailyForecasts = "DailyForecasts"
@@ -22,7 +22,7 @@ struct DailyForecast: Decodable {
     let temperature: Temperature
     let day, night: Day
     
-  //  var timeZoneName: String = ""
+    var timeZone: String?
 
 
     enum CodingKeys: String, CodingKey {
