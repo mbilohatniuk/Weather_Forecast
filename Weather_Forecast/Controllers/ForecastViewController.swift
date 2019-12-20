@@ -32,17 +32,17 @@ class ForecastViewController: UIViewController {
     //MARK: - private variables
     private var responseDataForFiveDays: FiveDayForecastModel? {
         didSet {
-            if isViewLoaded {
-                tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
         }
     }
     
     private var responseDataForTwelveHours: [TwelveHoursForecastModel]? {
         didSet {
-            if isViewLoaded {
-                collectionView.reloadData()
-            }
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
         }
     }
     
@@ -75,8 +75,11 @@ class ForecastViewController: UIViewController {
         self.collectionView.register(CVCellNin, forCellWithReuseIdentifier: "CVCellID")
         
         reloadScreenData()
-        tableView.reloadData()
-        collectionView.reloadData()
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.collectionView.reloadData()
+        }
     }
     
     @objc func favouriteButtonTapped() {
@@ -203,7 +206,7 @@ extension ForecastViewController {
         }
         
         dispatchGroup.wait()
-
+        
         timeZoneService.fetchTimeZone(cityKey: cityKey,
                                       completion: setTimeZone(_:),
                                       failure: workWithError(_:))

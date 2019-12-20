@@ -63,9 +63,8 @@ class TwelveHoursForecastServive: APIConfigurator {
                 decoder.dateDecodingStrategy = .iso8601
                 let dataJSON = try decoder.decode([TwelveHoursForecastModel].self, from: data)
                 
-                DispatchQueue.main.async {
-                    completion(dataJSON)
-                }
+                completion(dataJSON)
+                
             } catch let error {
                 DispatchQueue.main.async {
                     failure(FetchError.decodeError(error.localizedDescription))

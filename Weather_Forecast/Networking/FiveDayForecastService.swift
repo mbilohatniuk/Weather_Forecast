@@ -76,10 +76,8 @@ class FiveDayForecatService: APIConfigurator {
                 decoder.dateDecodingStrategy = .iso8601
                 
                 let fiveDayData = try decoder.decode(FiveDayForecastModel.self, from: data)
-                
-                DispatchQueue.main.async {
-                    completion(fiveDayData)
-                }
+        
+                completion(fiveDayData)
                 
             } catch let error {
                 DispatchQueue.main.async {
