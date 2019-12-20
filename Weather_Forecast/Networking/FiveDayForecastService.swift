@@ -25,7 +25,7 @@ enum FetchError: Error, LocalizedError {
     }
 }
 
-class FiveDayForecast: APIConfigurator {
+class FiveDayForecastService: APIConfigurator {
     
     let host: String
     let APIKey: String
@@ -48,7 +48,7 @@ class FiveDayForecast: APIConfigurator {
         self.metric = metric
     }
     
-    func fetchDailyForecasts(cityKey: String, completion: @escaping(DailyForecastsResponse) -> Void, failure: @escaping(Error) -> Void) {
+    func fetchDailyForecasts(cityKey: String, completion: @escaping(FiveDayForecastModel) -> Void, failure: @escaping(Error) -> Void) {
         
         guard let url = URL(string: "\(self.host)/forecasts/v1/daily/5day/\(cityKey)?apikey=\(self.APIKey)\(self.detailsForAPI)\(self.metricForAPI)") else {
             return
@@ -71,7 +71,7 @@ class FiveDayForecast: APIConfigurator {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601
                 
-                let fiveDayData = try decoder.decode(DailyForecastsResponse.self, from: data)
+                let fiveDayData = try decoder.decode(FiveDayForecastModel.self, from: data)
                 
                 DispatchQueue.main.async {
                     completion(fiveDayData)

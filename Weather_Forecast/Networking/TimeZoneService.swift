@@ -50,6 +50,7 @@ class TimeZoneService: APIConfigurator {
                 DispatchQueue.main.async {
                     completion(dataJSON)
                 }
+                
             } catch {
                 DispatchQueue.main.async {
                     failure(FetchError.decodeError(error.localizedDescription))

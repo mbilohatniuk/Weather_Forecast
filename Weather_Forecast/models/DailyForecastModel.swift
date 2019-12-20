@@ -8,7 +8,7 @@
 
 import Foundation
  
-struct DailyForecastsResponse: Decodable {
+struct FiveDayForecastModel: Decodable {
     var dailyForecasts: [DailyForecast]
 
     enum CodingKeys: String, CodingKey {

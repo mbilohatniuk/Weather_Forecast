@@ -13,7 +13,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     
-    func configure(model: TwelveHoursForecastResponse) {
+    func configure(model: TwelveHoursForecastModel) {
         timeLabel.text = model.dateTime.toStringTime(dateFormat: "hh:mm", timeZone: model.timeZone ?? "")
         tempLabel.text = "\(model.temperature.value)ºC"
     }

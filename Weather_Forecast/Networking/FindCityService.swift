@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FindCity: APIConfigurator {
+class FindCityService: APIConfigurator {
     
     let host: String
     let APIKey: String

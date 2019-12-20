@@ -15,7 +15,7 @@ class FindCityViewController: UIViewController {
     private var responseCities: [FoundCities]?
     private var resultOfUserRequest = [FoundCities]()
     private let searchController = UISearchController(searchResultsController: nil)
-    private let service = FindCity(host: Constants.host, APIKey: Constants.APIKey)
+    private let service = FindCityService(host: Constants.host, APIKey: Constants.APIKey)
     
     @IBOutlet weak var tableView: UITableView!
     

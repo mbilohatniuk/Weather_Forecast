@@ -20,7 +20,7 @@ import Foundation
 import Foundation
 // add   get cityKeys
 
-class TwelveHoursForecast: APIConfigurator {
+class TwelveHoursForecastServive: APIConfigurator {
     
     
     
@@ -41,7 +41,7 @@ class TwelveHoursForecast: APIConfigurator {
     }
     
     
-    func fetchTwelveHoursForecasts(cityKey: String, completion: @escaping([TwelveHoursForecastResponse]) -> Void, failure: @escaping(Error) -> Void) {
+    func fetchTwelveHoursForecasts(cityKey: String, completion: @escaping([TwelveHoursForecastModel]) -> Void, failure: @escaping(Error) -> Void) {
         guard let url = URL(string: "\(self.host)/forecasts/v1/hourly/12hour/\(cityKey)?apikey=\(self.APIKey)\(self.metricForAPI)") else {
             return
         }
@@ -62,7 +62,7 @@ class TwelveHoursForecast: APIConfigurator {
             do {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601
-                let dataJSON = try decoder.decode([TwelveHoursForecastResponse].self, from: data)
+                let dataJSON = try decoder.decode([TwelveHoursForecastModel].self, from: data)
                 
                 DispatchQueue.main.async {
                     completion(dataJSON)

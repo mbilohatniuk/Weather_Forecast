@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TwelveHoursForecastResponse: Decodable {
+struct TwelveHoursForecastModel: Decodable {
     let dateTime: Date
     let temperature: TemperatureOfHour
 

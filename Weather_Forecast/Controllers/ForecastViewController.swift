@@ -16,7 +16,7 @@ import UIKit
     
     static let heightCell: CGFloat = 300
     static let host = "http://dataservice.accuweather.com"
-    static let APIKey = "dqaI6T11mu6GjnsGcF2FEbZG9bLnJjU4"
+    static let APIKey = "jasoxQ69ZDTM0QCmJGigH40AG9iemwGG"
     static let backgroundImage = UIImage(named: "background_forecast")
 }
 
@@ -30,17 +30,7 @@ class ForecastViewController: UIViewController {
     
     
     //MARK: - private variables
-    private var fiveDayForecastAPIConfig = APIElements(host: Constants.host,
-                                               APIKey: Constants.APIKey,
-                                               details: true,
-                                               metric: true)
-    
-    private var twelveHoursForecastAPIConfig = APIElements(host: Constants.host,
-                                                   APIKey: Constants.APIKey,
-                                                   metric: true)
-    
-    
-    private var responseDataForFiveDays: DailyForecastsResponse? {
+    private var responseDataForFiveDays: FiveDayForecastModel? {
         didSet {
             if isViewLoaded {
                 tableView.reloadData()
@@ -48,7 +38,7 @@ class ForecastViewController: UIViewController {
         }
     }
     
-    private var responseDataForTwelveHours: [TwelveHoursForecastResponse]? {
+    private var responseDataForTwelveHours: [TwelveHoursForecastModel]? {
         didSet {
             if isViewLoaded {
                 collectionView.reloadData()
@@ -107,11 +97,11 @@ class ForecastViewController: UIViewController {
 
     }
     
-    private func setHourlyForecastData(_ data: [TwelveHoursForecastResponse]) {
+    private func setHourlyForecastData(_ data: [TwelveHoursForecastModel]) {
         responseDataForTwelveHours = data
     }
     
-    private func setFiveDaysForecastData(_ data: DailyForecastsResponse) {
+    private func setFiveDaysForecastData(_ data: FiveDayForecastModel) {
         responseDataForFiveDays = data
     }
     
@@ -177,26 +167,39 @@ extension ForecastViewController {
     
     public func reloadScreenData(whith cityKey: String = "326175") {
         
-        let fiveDayForecast = FiveDayForecast(host: fiveDayForecastAPIConfig.host,
-                                              APIKey: fiveDayForecastAPIConfig.APIKey,
-                                              details: fiveDayForecastAPIConfig.details,
-                                              metric: fiveDayForecastAPIConfig.metric!)
+        let dispatchQueue = DispatchQueue(label: "Async Queue", attributes: .concurrent)
+        let dispatchGroup = DispatchGroup()
         
-        fiveDayForecast.fetchDailyForecasts(cityKey: cityKey,
-                                            completion: setFiveDaysForecastData(_:),
-                                            failure: workWithError(_:))
+        let fiveDayForecast = FiveDayForecastService(host: Constants.host,
+                                              APIKey: Constants.APIKey,
+                                              details: true,
+                                              metric: true)
         
-        let twelveHoursForecast = TwelveHoursForecast(host: twelveHoursForecastAPIConfig.host,
-                                                      APIKey: twelveHoursForecastAPIConfig.APIKey,
-                                                      metric: twelveHoursForecastAPIConfig.metric!)
-        
-        twelveHoursForecast.fetchTwelveHoursForecasts(cityKey: cityKey,
-                                                      completion: setHourlyForecastData(_:),
-                                                      failure: workWithError(_:))
+        let twelveHoursForecast = TwelveHoursForecastServive(host: Constants.host,
+                                                      APIKey: Constants.APIKey,
+                                                      metric: true)
         
         let timeZoneService = TimeZoneService(host: Constants.host,
                                               APIKey: Constants.APIKey)
         
+        dispatchGroup.enter()
+        dispatchQueue.async {
+            fiveDayForecast.fetchDailyForecasts(cityKey: cityKey,
+                                                completion: self.setFiveDaysForecastData(_:),
+                                                failure: self.workWithError(_:))
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        dispatchQueue.async {
+            twelveHoursForecast.fetchTwelveHoursForecasts(cityKey: cityKey,
+                                                          completion: self.setHourlyForecastData(_:),
+                                                          failure: self.workWithError(_:))
+            dispatchGroup.leave()
+        }
+
+        dispatchGroup.wait()
+
         timeZoneService.fetchTimeZone(cityKey: cityKey,
                                       completion: setTimeZone(_:),
                                       failure: workWithError(_:))
