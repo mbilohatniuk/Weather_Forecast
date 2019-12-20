@@ -17,9 +17,6 @@ import Foundation
 //  Copyright © 2019 Maksym Bilohatniuk. All rights reserved.
 //
 
-import Foundation
-// add   get cityKeys
-
 class TwelveHoursForecastServive: APIConfigurator {
     
     let host: String

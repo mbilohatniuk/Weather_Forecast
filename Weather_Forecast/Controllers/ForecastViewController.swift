@@ -33,7 +33,7 @@ class ForecastViewController: UIViewController {
     private var responseDataForFiveDays: FiveDayForecastModel? {
         didSet {
             if isViewLoaded {
-                //tableView.reloadData()
+                tableView.reloadData()
             }
         }
     }
@@ -41,7 +41,7 @@ class ForecastViewController: UIViewController {
     private var responseDataForTwelveHours: [TwelveHoursForecastModel]? {
         didSet {
             if isViewLoaded {
-                //collectionView.reloadData()
+                collectionView.reloadData()
             }
         }
     }
@@ -185,19 +185,23 @@ extension ForecastViewController {
         dispatchGroup.enter()
         dispatchQueue.async {
             fiveDayForecast.fetchDailyForecasts(cityKey: cityKey,
-                                                completion: self.setFiveDaysForecastData(_:),
+                                                completion: { (data: FiveDayForecastModel) in
+                                                    self.setFiveDaysForecastData(data)
+                                                    dispatchGroup.leave()
+                                                    },
                                                 failure: self.workWithError(_:))
-            dispatchGroup.leave()
         }
         
         dispatchGroup.enter()
         dispatchQueue.async {
             twelveHoursForecast.fetchTwelveHoursForecasts(cityKey: cityKey,
-                                                          completion: self.setHourlyForecastData(_:),
+                                                          completion: { (data: [TwelveHoursForecastModel]) in
+                                                            self.setHourlyForecastData(data)
+                                                            dispatchGroup.leave()
+                                                            },
                                                           failure: self.workWithError(_:))
-            dispatchGroup.leave()
         }
-
+        
         dispatchGroup.wait()
 
         timeZoneService.fetchTimeZone(cityKey: cityKey,

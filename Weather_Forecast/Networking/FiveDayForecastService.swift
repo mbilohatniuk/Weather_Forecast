@@ -79,7 +79,6 @@ class FiveDayForecatService: APIConfigurator {
                 
                 DispatchQueue.main.async {
                     completion(fiveDayData)
-                    //leave
                 }
                 
             } catch let error {
