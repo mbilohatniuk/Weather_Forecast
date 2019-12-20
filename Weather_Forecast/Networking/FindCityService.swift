@@ -11,9 +11,13 @@ import Foundation
 class FindCityService: APIConfigurator {
     
     let host: String
+    
     let APIKey: String
+    
     var details: Bool?
+    
     var metric: Bool?
+    
     var cityKey: String?
     
     init(host: String, APIKey: String) {

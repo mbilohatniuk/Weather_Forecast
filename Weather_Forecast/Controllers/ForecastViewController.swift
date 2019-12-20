@@ -33,7 +33,7 @@ class ForecastViewController: UIViewController {
     private var responseDataForFiveDays: FiveDayForecastModel? {
         didSet {
             if isViewLoaded {
-                tableView.reloadData()
+                //tableView.reloadData()
             }
         }
     }
@@ -41,7 +41,7 @@ class ForecastViewController: UIViewController {
     private var responseDataForTwelveHours: [TwelveHoursForecastModel]? {
         didSet {
             if isViewLoaded {
-                collectionView.reloadData()
+                //collectionView.reloadData()
             }
         }
     }
@@ -170,7 +170,7 @@ extension ForecastViewController {
         let dispatchQueue = DispatchQueue(label: "Async Queue", attributes: .concurrent)
         let dispatchGroup = DispatchGroup()
         
-        let fiveDayForecast = FiveDayForecastService(host: Constants.host,
+        let fiveDayForecast = FiveDayForecatService(host: Constants.host,
                                               APIKey: Constants.APIKey,
                                               details: true,
                                               metric: true)

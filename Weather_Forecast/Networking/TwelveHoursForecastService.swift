@@ -22,12 +22,14 @@ import Foundation
 
 class TwelveHoursForecastServive: APIConfigurator {
     
-    
-    
     let host: String
+    
     let APIKey: String
+    
     var details: Bool?
+    
     var metric: Bool?
+    
     var cityKey: String?
     
     var metricForAPI: String {
