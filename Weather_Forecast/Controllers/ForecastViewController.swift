@@ -205,11 +205,10 @@ extension ForecastViewController {
                                                           failure: self.workWithError(_:))
         }
         
-        dispatchGroup.wait()
-        
-        timeZoneService.fetchTimeZone(cityKey: cityKey,
-                                      completion: setTimeZone(_:),
-                                      failure: workWithError(_:))
-        
+        dispatchGroup.notify(queue: dispatchQueue) {
+                    timeZoneService.fetchTimeZone(cityKey: cityKey,
+                                                  completion: self.setTimeZone(_:),
+                                                  failure: self.workWithError(_:))
+        }
     }
 }
