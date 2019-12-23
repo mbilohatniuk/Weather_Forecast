@@ -27,6 +27,7 @@ class ForecastViewController: UIViewController {
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cityNameLabel: UILabel!
+    @IBOutlet weak var temperatureLabel: UILabel!
     
     
     //MARK: - private variables
@@ -49,15 +50,6 @@ class ForecastViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cities = [City]()
-        
-        let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(cities) {
-            let defaults = UserDefaults.standard
-            defaults.set(encoded, forKey: "cities")
-        }
-     
-        
         let favouriteButton = UIBarButtonItem(title: "Favourite Citys",
                                               style: .done,
                                               target: self,
@@ -66,6 +58,7 @@ class ForecastViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = favouriteButton
         
         backgroundImage.image = Constants.backgroundImage
+        backgroundImage.layer.cornerRadius = 40
         
         // Register table  and collection cell class from nib
         let cellNib = UINib(nibName: "WeatherTableViewCell", bundle: nil)
@@ -101,6 +94,9 @@ class ForecastViewController: UIViewController {
     }
     
     private func setHourlyForecastData(_ data: [TwelveHoursForecastModel]) {
+        DispatchQueue.main.async {
+            self.temperatureLabel.text = "\(data[0].temperature.value)ºC"
+        }
         responseDataForTwelveHours = data
     }
     

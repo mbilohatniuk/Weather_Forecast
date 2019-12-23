@@ -70,9 +70,9 @@ class FavouriteCitysTableViewController: UITableViewController {
                 if loadedCities.count > 0 {
                     arrayOfFavouriteCities = loadedCities
                 }
-            } else {
-                print("ERROR")
             }
+        } else {
+            arrayOfFavouriteCities = []
         }
     }
 }
